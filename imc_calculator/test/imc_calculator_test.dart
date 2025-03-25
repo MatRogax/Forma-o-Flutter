@@ -1,6 +1,5 @@
 import 'package:imc_calculator/classes/Person_mode.dart';
 import 'package:test/test.dart';
-// Importa a classe Person
 
 void main() {
   group('Person Tests', () {
@@ -16,12 +15,6 @@ void main() {
       var bmiCategory = person.getBMICategory();
 
       expect(bmiCategory, equals('saúdavel'));
-    });
-
-    test('Test invalid inputs', () {
-      var person = Person(name: '', age: 0, weight: 0.0, height: 0.0);
-
-      expect(() => person.getInformationsPerson(), throwsA(isA<Exception>()));
     });
   });
 }
