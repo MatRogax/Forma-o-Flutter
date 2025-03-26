@@ -1,0 +1,41 @@
+{
+    // Use o IntelliSense para saber mais sobre os atributos possíveis.
+    // Focalizar para exibir as descrições dos atributos existentes.
+    // Para obter mais informações, acesse: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        
+        {
+            "name": "http_teste",
+            "cwd": "http_teste",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "imc_calculator",
+            "cwd": "imc_calculator",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "app_imc",
+            "cwd": "imc_app\\app_imc",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "app_imc (profile mode)",
+            "cwd": "imc_app\\app_imc",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "app_imc (release mode)",
+            "cwd": "imc_app\\app_imc",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        }
+    ]
+}
