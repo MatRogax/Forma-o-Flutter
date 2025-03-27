@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
 
-class CampField extends StatelessWidget {
-  final Widget child;
-  final double? width;
-  final double? height;
-  final Decoration? boxDecoration;
-  const CampField({
+class CardWidget extends StatelessWidget {
+  final Size size;
+  final Widget childCard;
+  final Decoration decoration;
+  const CardWidget({
     super.key,
-    required this.child,
-    this.width,
-    this.height,
-    this.boxDecoration,
+    required this.childCard,
+    required this.size,
+    required this.decoration,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: width,
-      height: height,
-      decoration: boxDecoration,
-      child: child,
+    return Center(
+      child: Container(
+        height: size.height * 0.04,
+        width: size.width * 0.32,
+        decoration: decoration,
+        child: childCard,
+      ),
     );
   }
 }

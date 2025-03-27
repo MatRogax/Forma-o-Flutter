@@ -7,106 +7,126 @@ class CalculatorPage extends StatefulWidget {
   const CalculatorPage({super.key});
 
   @override
-  State<CalculatorPage> createState() => _HomePageState();
+  State<CalculatorPage> createState() => _CalculatorPageState();
 }
 
-class _HomePageState extends State<CalculatorPage> {
-  Color? colorSchema = Colors.white;
+class _CalculatorPageState extends State<CalculatorPage> {
+  int selectedIndex = 0;
 
-  void changeColor(Color colorTochange) {
-    setState(() {
-      colorSchema = colorTochange;
-    });
-  }
+  List<Map<String, dynamic>> categoriesPerson = [
+    {"Person": "Homem"},
+    {"Person": "Mulher"},
+  ];
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Scaffold(
-      backgroundColor: Constants.assistantColorTheme,
-      body: SafeArea(
-        child: SizedBox(
-          width: size.width,
+    return SafeArea(
+      child: Scaffold(
+        body: SizedBox(
+          width: double.infinity,
           height: size.height,
-          child: Column(
+          child: Stack(
             children: [
               Container(
-                color: Constants.primaryColorTheme.withOpacity(0.9),
                 width: size.width,
-                height: size.height * 0.1,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Text(
-                      "Nos conte um pouco sobre você",
-                      style: GoogleFonts.poppins(
-                        color: Constants.assistantColorTheme,
+                height: size.height * 0.15,
+                decoration: BoxDecoration(
+                  color: Constants.primaryColorTheme.withOpacity(0.9),
+                ),
+                child: Padding(
+                  padding: EdgeInsets.only(bottom: size.height * 0.02),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Nos conte um pouco sobre você",
+                        style: GoogleFonts.poppins(
+                          color: Constants.assistantColorTheme,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                    Text(
-                      "Insira seus detalhes abaixo",
-                      style: GoogleFonts.roboto(
-                        color: Constants.assistantColorTheme,
+                      Text(
+                        "Insira seus detalhes abaixo",
+                        style: GoogleFonts.roboto(
+                          color: Constants.assistantColorTheme,
+                          fontSize: 14,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
-              Expanded(
-                child: ClipRRect(
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(20),
-                    topRight: Radius.circular(20),
-                  ),
+              Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: SizedBox(
+                  height: size.height * 0.7,
                   child: Container(
-                    width: size.width,
+                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+                    width: double.infinity,
                     decoration: const BoxDecoration(
                       color: Colors.white,
+                      borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
                     ),
                     child: SingleChildScrollView(
-                      child: SizedBox(
-                        height: size.height * 0.8,
-                        child: Column(
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.only(top: size.height * 0.02),
-                              child: Row(
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsets.only(
-                                      left: size.width * 0.04,
-                                      right: size.width * 0.04,
-                                    ),
-                                    child: GestureDetector(
-                                      onTap: () => changeColor(Constants.primaryColorTheme),
-                                      child: CampField(
-                                        width: size.width * 0.5,
-                                        child: Text(
-                                          "Homem",
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.only(
-                                      left: size.width * 0.04,
-                                      right: size.width * 0.04,
-                                    ),
-                                    child: GestureDetector(
-                                      onTap: () => changeColor(Constants.primaryColorTheme),
-                                      child: CampField(
-                                        width: size.width * 0.5,
-                                        child: Text(
-                                          "Mulher",
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: size.height * 0.05,
+                            width: size.width,
+                            child: Padding(
+                              padding: EdgeInsets.only(
+                                left: size.width * 0.08,
+                                right: size.width * 0.04,
                               ),
-                            )
-                          ],
-                        ),
+                              child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemCount: categoriesPerson.length,
+                                itemBuilder: (context, index) {
+                                  bool isSelected = selectedIndex == index;
+                                  return GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        selectedIndex = isSelected ? -1 : index;
+                                      });
+                                    },
+                                    child: Padding(
+                                      padding: EdgeInsets.only(
+                                        left: size.width * 0.02,
+                                        right: size.width * 0.02,
+                                      ),
+                                      child: CardWidget(
+                                        decoration: selectedIndex == index
+                                            ? BoxDecoration(
+                                                color: Constants.primaryColorTheme,
+                                                borderRadius: BorderRadius.circular(50),
+                                              )
+                                            : BoxDecoration(
+                                                color: Constants.assistantColorTheme,
+                                                borderRadius: BorderRadius.circular(40),
+                                              ),
+                                        childCard: Center(
+                                          child: Text(
+                                            categoriesPerson[index]['Person'],
+                                            style: TextStyle(
+                                              fontSize: 12.0,
+                                              fontWeight: FontWeight.bold,
+                                              color: selectedIndex == index ? Colors.white : Constants.primaryColorTheme,
+                                            ),
+                                          ),
+                                        ),
+                                        size: size,
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
