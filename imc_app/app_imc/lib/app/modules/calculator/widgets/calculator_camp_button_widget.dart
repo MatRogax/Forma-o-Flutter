@@ -15,8 +15,8 @@ class CardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        height: size.height * 0.04,
-        width: size.width * 0.32,
+        height: size.height * 0.044,
+        width: size.width * 0.35,
         decoration: decoration,
         child: childCard,
       ),
